@@ -1,0 +1,594 @@
+:root {
+    --color-primary-50: #e8f5e9;
+    --color-primary-100: #c8e6c9;
+    --color-primary-200: #a5d6a7;
+    --color-primary-300: #81c784;
+    --color-primary-400: #66bb6a;
+    --color-primary-500: #43a047;
+    --color-primary-600: #2e7d32;
+    --color-primary-700: #1b5e20;
+
+    --color-surface-0: #ffffff;
+    --color-surface-50: #f5f7f5;
+    --color-surface-100: #e8efe8;
+    --color-surface-200: #d4ddd2;
+    --color-surface-300: #b5c1b3;
+    --color-surface-500: #6b7a6b;
+    --color-surface-700: #3d4a3d;
+    --color-surface-800: #252d26;
+    --color-surface-900: #181e18;
+
+    --font-family:
+        "DM Sans", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+        "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+
+    --radius-sm: 6px;
+    --radius-md: 10px;
+    --radius-lg: 16px;
+    --radius-xl: 24px;
+
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.06);
+    --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.08);
+    --shadow-xl: 0 20px 60px rgba(0, 0, 0, 0.12);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.kcBodyClass {
+    font-family: var(--font-family);
+    background: linear-gradient(
+        135deg,
+        var(--color-surface-50) 0%,
+        var(--color-primary-50) 50%,
+        var(--color-surface-100) 100%
+    );
+    background-attachment: fixed;
+    color: var(--color-surface-900);
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow-x: hidden;
+}
+
+.kcBodyClass::before {
+    content: "";
+    position: fixed;
+    top: -50%;
+    right: -30%;
+    width: 80%;
+    height: 100%;
+    background: radial-gradient(
+        ellipse at center,
+        rgba(67, 160, 71, 0.08) 0%,
+        transparent 70%
+    );
+    pointer-events: none;
+    z-index: 0;
+}
+
+.kcBodyClass::after {
+    content: "";
+    position: fixed;
+    bottom: -30%;
+    left: -20%;
+    width: 60%;
+    height: 80%;
+    background: radial-gradient(
+        ellipse at center,
+        rgba(67, 160, 71, 0.06) 0%,
+        transparent 70%
+    );
+    pointer-events: none;
+    z-index: 0;
+}
+
+.kcLoginClass {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 440px;
+    padding: 1.5rem;
+}
+
+.kcHeaderClass {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.kcHeaderWrapperClass::before {
+    content: "";
+    display: block;
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 1rem;
+    background-image: url("/logo.svg");
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.kcLogoClass {
+    max-width: 56px;
+    height: auto;
+    margin-bottom: 1.25rem;
+    filter: drop-shadow(0 2px 8px rgba(67, 160, 71, 0.2));
+}
+
+.kcTitleClass {
+    font-size: 1.625rem;
+    font-weight: 700;
+    color: var(--color-surface-900);
+    margin: 0 0 0.5rem 0;
+    letter-spacing: -0.02em;
+}
+
+.kcSubtitleClass {
+    font-size: 0.9375rem;
+    color: var(--color-surface-500);
+    margin: 0;
+    font-weight: 400;
+}
+
+.kcContentClass {
+    background: var(--color-surface-0);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-xl);
+    padding: 2.25rem;
+    border: 1px solid rgba(67, 160, 71, 0.08);
+    position: relative;
+    overflow: hidden;
+}
+
+.kcContentClass::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(
+        90deg,
+        var(--color-primary-400),
+        var(--color-primary-500),
+        var(--color-primary-400)
+    );
+}
+
+.kcFormClass {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.kcFormGroupClass {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.kcLabelClass {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--color-surface-700);
+    letter-spacing: 0.01em;
+    text-transform: uppercase;
+}
+
+.kcInputClass {
+    width: 100%;
+    padding: 0.8125rem 1rem;
+    font-size: 0.9375rem;
+    font-family: var(--font-family);
+    border: 1.5px solid var(--color-surface-200);
+    border-radius: var(--radius-md);
+    background-color: var(--color-surface-0);
+    color: var(--color-surface-900);
+    transition: all 0.2s ease;
+}
+
+.kcInputClass:hover {
+    border-color: var(--color-surface-300);
+}
+
+.kcInputClass:focus {
+    outline: none;
+    border-color: var(--color-primary-500);
+    box-shadow: 0 0 0 4px rgba(67, 160, 71, 0.12);
+    background-color: #faffff;
+}
+
+.kcInputClass::placeholder {
+    color: var(--color-surface-400);
+}
+
+.kcInputErrorClass {
+    border-color: #ef4444 !important;
+    background-color: #fef2f2 !important;
+}
+
+.kcInputErrorClass:focus {
+    box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.12) !important;
+}
+
+.kcButtonClass {
+    width: 100%;
+    padding: 0.9375rem 1.5rem;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    font-family: var(--font-family);
+    background: linear-gradient(
+        135deg,
+        var(--color-primary-500) 0%,
+        var(--color-primary-600) 100%
+    ) !important;
+    border: none !important;
+    border-radius: var(--radius-md) !important;
+    color: white !important;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    box-shadow: 0 4px 14px rgba(67, 160, 71, 0.35);
+    letter-spacing: 0.01em;
+    margin-top: 0.5rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.kcButtonClass::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.2),
+        transparent
+    );
+    transition: left 0.5s ease;
+}
+
+.kcButtonClass:hover {
+    background: linear-gradient(
+        135deg,
+        var(--color-primary-600) 0%,
+        var(--color-primary-700) 100%
+    ) !important;
+    box-shadow: 0 6px 20px rgba(67, 160, 71, 0.4);
+    transform: translateY(-1px);
+}
+
+.kcButtonClass:hover::before {
+    left: 100%;
+}
+
+.kcButtonClass:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 8px rgba(67, 160, 71, 0.3);
+}
+
+.kcButtonPrimaryClass {
+}
+
+.kcButtonBlockClass {
+}
+
+.kcButtonLargeClass {
+}
+
+.kcFormOptionsWrapperClass {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 0.25rem;
+}
+
+.kcCheckClass {
+    width: 18px;
+    height: 18px;
+    min-width: 18px;
+    accent-color: var(--color-primary-500);
+    cursor: pointer;
+    border-radius: 4px;
+    margin: 0;
+}
+
+.kcLabelWrapperClass {
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+    font-size: 0.875rem;
+    color: var(--color-surface-600);
+    cursor: pointer;
+    user-select: none;
+    font-weight: 500;
+}
+
+.kcLabelWrapperClass span {
+    line-height: 1.4;
+}
+
+.kcLabelWrapperClass:hover {
+    color: var(--color-surface-700);
+}
+
+.kcAlertClass {
+    background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);
+    border: 1px solid #fecaca;
+    border-radius: var(--radius-md);
+    padding: 1rem 1.125rem;
+    margin-bottom: 1.25rem;
+    color: #b91c1c;
+    font-size: 0.875rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    border-left: 3px solid #ef4444;
+}
+
+.kcAlertErrorClass {
+    background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);
+    border-color: #fca5a5;
+    color: #991b1b;
+}
+
+.kcAlertSuccessClass {
+    background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+    border-color: #86efac;
+    color: #166534;
+    border-left-color: #22c55e;
+}
+
+.kcAlertInfoClass {
+    background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+    border-color: #93c5fd;
+    color: #1e40af;
+    border-left-color: #3b82f6;
+}
+
+.kcLinkClass {
+    color: var(--color-primary-600);
+    text-decoration: none;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: color 0.2s ease;
+}
+
+.kcLinkClass:hover {
+    color: var(--color-primary-700);
+    text-decoration: underline;
+}
+
+.kcCardClass {
+    width: 100%;
+}
+
+.kcSignUpClass {
+    text-align: center;
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--color-surface-100);
+    font-size: 0.875rem;
+    color: var(--color-surface-500);
+}
+
+.kcSignUpClass .kcLinkClass {
+    font-weight: 600;
+}
+
+.kcFormPasswordStrengthClass {
+    height: 4px;
+    background: var(--color-surface-100);
+    border-radius: 2px;
+    margin-top: 0.5rem;
+    overflow: hidden;
+}
+
+.kcSelectClass {
+    width: 100%;
+    padding: 0.8125rem 1rem;
+    font-size: 0.9375rem;
+    font-family: var(--font-family);
+    border: 1.5px solid var(--color-surface-200);
+    border-radius: var(--radius-md);
+    background-color: var(--color-surface-0);
+    color: var(--color-surface-900);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%236b7a6b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    padding-right: 2.5rem;
+}
+
+.kcSelectClass:hover {
+    border-color: var(--color-surface-300);
+}
+
+.kcSelectClass:focus {
+    outline: none;
+    border-color: var(--color-primary-500);
+    box-shadow: 0 0 0 4px rgba(67, 160, 71, 0.12);
+}
+
+.kcLanguageSectionClass {
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.kcLanguageDropdownClass {
+    background: var(--color-surface-0);
+    border: 1px solid var(--color-surface-200);
+    border-radius: var(--radius-md);
+    padding: 0.5rem 0.75rem;
+    font-size: 0.8125rem;
+    font-family: var(--font-family);
+    color: var(--color-surface-600);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.kcLanguageDropdownClass:hover {
+    border-color: var(--color-primary-400);
+    color: var(--color-primary-600);
+}
+
+.kcFeedbacksummitClass {
+    font-size: 0.8125rem;
+    font-weight: 500;
+    margin-top: 0.25rem;
+}
+
+.kcFeedbacksummitErrorClass {
+    color: #ef4444;
+}
+
+.kcFeedbacksummitSuccessClass {
+    color: #22c55e;
+}
+
+.kcTextareaClass {
+    width: 100%;
+    padding: 0.8125rem 1rem;
+    font-size: 0.9375rem;
+    font-family: var(--font-family);
+    border: 1.5px solid var(--color-surface-200);
+    border-radius: var(--radius-md);
+    background-color: var(--color-surface-0);
+    color: var(--color-surface-900);
+    resize: vertical;
+    min-height: 100px;
+    transition: all 0.2s ease;
+}
+
+.kcTextareaClass:focus {
+    outline: none;
+    border-color: var(--color-primary-500);
+    box-shadow: 0 0 0 4px rgba(67, 160, 71, 0.12);
+}
+
+.kcSocialClass {
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--color-surface-100);
+}
+
+.kcSocialTitleClass {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--color-surface-400);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.kcSocialSectionClass {
+    display: flex;
+    gap: 0.75rem;
+}
+
+.kcSocialLinkClass {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.75rem;
+    border: 1.5px solid var(--color-surface-200);
+    border-radius: var(--radius-md);
+    background: var(--color-surface-0);
+    color: var(--color-surface-600);
+    text-decoration: none;
+    font-size: 1.25rem;
+    transition: all 0.2s ease;
+}
+
+.kcSocialLinkClass:hover {
+    border-color: var(--color-primary-400);
+    background: var(--color-primary-50);
+    color: var(--color-primary-600);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.password-visibility-toggle {
+    position: absolute;
+    right: 0.75rem;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--color-surface-400);
+    padding: 0.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.2s ease;
+}
+
+.password-visibility-toggle:hover {
+    color: var(--color-surface-600);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.kcLoginClass {
+    animation: fadeIn 0.5s ease forwards;
+}
+
+@keyframes shake {
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+    10%,
+    30%,
+    50%,
+    70%,
+    90% {
+        transform: translateX(-4px);
+    }
+    20%,
+    40%,
+    60%,
+    80% {
+        transform: translateX(4px);
+    }
+}
+
+.kcAlertErrorClass {
+    animation: shake 0.4s ease;
+}
+
+@media (max-width: 480px) {
+    .kcContentClass {
+        padding: 1.5rem;
+        border-radius: var(--radius-lg);
+    }
+
+    .kcLoginClass {
+        padding: 1rem;
+    }
+
+    .kcTitleClass {
+        font-size: 1.375rem;
+    }
+}
