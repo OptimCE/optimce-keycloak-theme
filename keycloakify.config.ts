@@ -2,5 +2,13 @@ import type { KeycloakifyBuildOptions } from "keycloakify";
 
 export const config: KeycloakifyBuildOptions = {
     themeName: "optimce",
-    keycloakVersion: "24.0.0"
+    keycloakVersion: "24.0.0",
+    groupId: "com.optimce.keycloak",
+    artifactId: "optimce-keycloak-theme",
+    extraThemeProperties: [
+        {
+            name: "optimce",
+            properties: {}
+        }
+    ]
 };
