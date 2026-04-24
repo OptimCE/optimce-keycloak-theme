@@ -6,7 +6,6 @@ import { getKcClsx } from "keycloakify/login/lib/kcClsx";
 import { useSetClassName } from "keycloakify/tools/useSetClassName";
 import { useInitialize } from "keycloakify/login/Template.useInitialize";
 import type { I18n } from "./i18n";
-import { ENABLED_LANGUAGE_TAGS } from "./i18n";
 import type { KcContext } from "./KcContext";
 
 export default function Template(props: TemplateProps<KcContext, I18n>) {
@@ -28,12 +27,7 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
 
     const { kcClsx } = getKcClsx({ doUseDefaultCss, classes });
 
-    const { msg, msgStr, currentLanguage, enabledLanguages: allEnabledLanguages } = i18n;
-
-    // Restrict the language switcher to the locales our theme ships translations for.
-    const enabledLanguages = allEnabledLanguages.filter(({ languageTag }) =>
-        (ENABLED_LANGUAGE_TAGS as readonly string[]).includes(languageTag)
-    );
+    const { msg, msgStr, currentLanguage, enabledLanguages } = i18n;
 
     const { realm, auth, url, message, isAppInitiatedAction } = kcContext;
 
@@ -61,7 +55,7 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
         <div className={kcClsx("kcLoginClass")}>
             <div id="kc-header" className={kcClsx("kcHeaderClass")}>
                 <div id="kc-header-wrapper" className={kcClsx("kcHeaderWrapperClass")}>
-                    {msg("loginTitleHtml", realm.displayNameHtml || realm.name)}
+                    OptimCE
                 </div>
             </div>
             <div className={kcClsx("kcFormCardClass")}>
