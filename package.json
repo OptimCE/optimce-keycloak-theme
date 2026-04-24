@@ -1,6 +1,6 @@
 {
     "name": "keycloakify-starter",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "description": "Starter for Keycloakify 11",
     "repository": {
         "type": "git",
@@ -12,7 +12,8 @@
         "build": "tsc && vite build",
         "build-keycloak-theme": "npm run build && keycloakify build",
         "storybook": "storybook dev -p 6006",
-        "format": "prettier . --write"
+        "format": "prettier . --write",
+        "add-story": "npx keycloakify add-story"
     },
     "license": "MIT",
     "keywords": [],
