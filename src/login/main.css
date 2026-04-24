@@ -7,16 +7,22 @@
     --color-primary-500: #43a047;
     --color-primary-600: #2e7d32;
     --color-primary-700: #1b5e20;
+    --color-primary-800: #145218;
+    --color-primary-900: #0d3b11;
+    --color-primary-950: #072508;
 
     --color-surface-0: #ffffff;
-    --color-surface-50: #f5f7f5;
-    --color-surface-100: #e8efe8;
-    --color-surface-200: #d4ddd2;
-    --color-surface-300: #b5c1b3;
-    --color-surface-500: #6b7a6b;
-    --color-surface-700: #3d4a3d;
+    --color-surface-50: #f8faf8;
+    --color-surface-100: #f0f4f0;
+    --color-surface-200: #e2e8e3;
+    --color-surface-300: #c9d3ca;
+    --color-surface-400: #9ba89d;
+    --color-surface-500: #6e7e70;
+    --color-surface-600: #4a5a4c;
+    --color-surface-700: #374038;
     --color-surface-800: #252d26;
     --color-surface-900: #181e18;
+    --color-surface-950: #0e120e;
 
     --font-family:
         "DM Sans", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
@@ -31,12 +37,15 @@
     --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.06);
     --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.08);
     --shadow-xl: 0 20px 60px rgba(0, 0, 0, 0.12);
+    width:60%;
 }
 
 * {
     box-sizing: border-box;
 }
-
+.kcHtmlClass{
+    width: 100%;
+}
 .kcBodyClass {
     font-family: var(--font-family);
     background: linear-gradient(
@@ -55,6 +64,12 @@
     justify-content: center;
     position: relative;
     overflow-x: hidden;
+    width:100%;
+}
+
+#root{
+    width: 100%;
+    justify-items: center;
 }
 
 .kcBodyClass::before {
@@ -62,7 +77,7 @@
     position: fixed;
     top: -50%;
     right: -30%;
-    width: 80%;
+    width: 100%;
     height: 100%;
     background: radial-gradient(
         ellipse at center,
@@ -78,7 +93,7 @@
     position: fixed;
     bottom: -30%;
     left: -20%;
-    width: 60%;
+    width: 100%;
     height: 80%;
     background: radial-gradient(
         ellipse at center,
@@ -93,7 +108,7 @@
     position: relative;
     z-index: 1;
     width: 100%;
-    max-width: 440px;
+    max-width: 500px;
     padding: 1.5rem;
 }
 
@@ -519,24 +534,124 @@
     box-shadow: var(--shadow-md);
 }
 
-.password-visibility-toggle {
-    position: absolute;
-    right: 0.75rem;
-    top: 50%;
-    transform: translateY(-50%);
-    background: none;
-    border: none;
-    cursor: pointer;
-    color: var(--color-surface-400);
-    padding: 0.25rem;
+/* Password field — input group wraps the password <input> and reveal button.
+   Default keycloakify layout places them as siblings; flex them so the
+   button docks to the right edge of the input row. */
+.kcInputGroupClass {
+    position: relative;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: color 0.2s ease;
+    align-items: stretch;
+    width: 100%;
 }
 
-.password-visibility-toggle:hover {
-    color: var(--color-surface-600);
+.kcInputGroupClass .kcInputClass {
+    flex: 1 1 auto;
+    padding-right: 3rem;
+}
+
+.kcPasswordVisibilityButton {
+    position: absolute;
+    right: 0.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 2.25rem;
+    height: 2.25rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    color: var(--color-surface-500);
+    padding: 0;
+    transition:
+        color 0.2s ease,
+        background-color 0.2s ease;
+}
+
+.kcPasswordVisibilityButton:hover {
+    color: var(--color-primary-600);
+    background-color: var(--color-primary-50);
+}
+
+.kcPasswordVisibilityButton:focus-visible {
+    outline: 2px solid var(--color-primary-400);
+    outline-offset: 1px;
+}
+
+/* Icons — render inline SVG via CSS masks so we don't rely on FontAwesome
+   (doUseDefaultCss=false means fa-eye/fa-eye-slash fonts aren't loaded). */
+.kcPasswordIcon {
+    width: 20px;
+    height: 20px;
+    display: block;
+    background-color: currentColor;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-size: contain;
+    mask-size: contain;
+}
+
+.kcPasswordIconShow {
+    -webkit-mask-image: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z'/%3E%3Ccircle cx='12' cy='12' r='3'/%3E%3C/svg%3E");
+    mask-image: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z'/%3E%3Ccircle cx='12' cy='12' r='3'/%3E%3C/svg%3E");
+}
+
+.kcPasswordIconHide {
+    -webkit-mask-image: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24'/%3E%3Cline x1='1' y1='1' x2='23' y2='23'/%3E%3C/svg%3E");
+    mask-image: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24'/%3E%3Cline x1='1' y1='1' x2='23' y2='23'/%3E%3C/svg%3E");
+}
+
+/* Language switcher — native <select> rendered by our custom Template. */
+#kc-locale {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 1rem;
+}
+
+#kc-locale-wrapper {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.kc-locale-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-surface-500);
+}
+
+.kc-locale-select {
+    font-family: var(--font-family);
+    font-size: 0.8125rem;
+    color: var(--color-surface-700);
+    background-color: var(--color-surface-0);
+    border: 1.5px solid var(--color-surface-200);
+    border-radius: var(--radius-sm);
+    padding: 0.375rem 2rem 0.375rem 0.75rem;
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%236e7e70' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.625rem center;
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.kc-locale-select:hover {
+    border-color: var(--color-primary-400);
+}
+
+.kc-locale-select:focus {
+    outline: none;
+    border-color: var(--color-primary-500);
+    box-shadow: 0 0 0 3px rgba(67, 160, 71, 0.12);
 }
 
 @keyframes fadeIn {
@@ -591,4 +706,97 @@
     .kcTitleClass {
         font-size: 1.375rem;
     }
+}
+
+/* ------------------------------------------------------------------
+   Register page — multi-field form
+   kcLabelWrapperClass and kcInputWrapperClass wrap each field.
+   Without explicit width they collapse to intrinsic content width,
+   which makes inputs look narrow. Force full-width stacking.
+   ------------------------------------------------------------------ */
+.kcInputWrapperClass {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.375rem;
+}
+
+/* The shared .kcLabelWrapperClass rule above is tuned for the
+   login "Remember me" row (checkbox + label, pointer cursor).
+   On register it wraps <label> + required asterisk — override so
+   the required star isn't pointer/low-weight. */
+#kc-register-form .kcLabelWrapperClass {
+    width: 100%;
+    cursor: default;
+    color: var(--color-surface-700);
+    font-weight: inherit;
+    gap: 0.25rem;
+    align-items: baseline;
+    margin-bottom: 0.125rem;
+}
+
+#kc-register-form .kcLabelWrapperClass:hover {
+    color: var(--color-surface-700);
+}
+
+#kc-register-form .kcFormGroupClass {
+    gap: 0.375rem;
+}
+
+/* The register form submit button sits in #kc-form-buttons right
+   after the back-to-login row. Give it breathing room. */
+#kc-register-form #kc-form-buttons {
+    margin-top: 0.5rem;
+}
+
+/* Back-to-login link — scoped to register so the login page's
+   "Remember me / Forgot password" row keeps its own layout. */
+#kc-register-form #kc-form-options {
+    margin-top: 1.5rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--color-surface-100);
+}
+
+#kc-register-form #kc-form-options .kcFormOptionsWrapperClass {
+    display: flex;
+    justify-content: center;
+    margin: 0;
+}
+
+#kc-register-form #kc-form-options a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-family: var(--font-family);
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--color-primary-600);
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: var(--radius-md);
+    transition:
+        background-color 0.2s ease,
+        color 0.2s ease;
+}
+
+#kc-register-form #kc-form-options a::before {
+    content: "←";
+    font-size: 1.1em;
+    line-height: 1;
+    transition: transform 0.2s ease;
+}
+
+#kc-register-form #kc-form-options a:hover {
+    background-color: var(--color-primary-50);
+    color: var(--color-primary-700);
+    text-decoration: none;
+}
+
+#kc-register-form #kc-form-options a:hover::before {
+    transform: translateX(-3px);
+}
+
+#kc-register-form #kc-form-options a:focus-visible {
+    outline: 2px solid var(--color-primary-400);
+    outline-offset: 2px;
 }
