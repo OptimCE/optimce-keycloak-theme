@@ -7,6 +7,7 @@ import { useSetClassName } from "keycloakify/tools/useSetClassName";
 import { useInitialize } from "keycloakify/login/Template.useInitialize";
 import type { I18n } from "./i18n";
 import type { KcContext } from "./KcContext";
+import { persistLanguage } from "./syncLanguageWithLocalStorage";
 
 export default function Template(props: TemplateProps<KcContext, I18n>) {
     const {
@@ -75,7 +76,8 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
                                             ({ languageTag }) => languageTag === event.target.value
                                         );
                                         if (target !== undefined) {
-                                            window.location.href = target.href;
+                                            persistLanguage(target.languageTag);
+                                            window.location.reload();
                                         }
                                     }}
                                 >
