@@ -298,13 +298,6 @@
 .kcButtonLargeClass {
 }
 
-.kcFormOptionsWrapperClass {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-top: 0.25rem;
-}
-
 .kcCheckClass {
     width: 18px;
     height: 18px;
@@ -396,6 +389,14 @@
 
 .kcSignUpClass .kcLinkClass {
     font-weight: 600;
+}
+
+/* Stacked footer: "Forgot Password?" above "Are you a new user? Register",
+   grouped as one set of secondary account actions. */
+.kc-account-links {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
 }
 
 .kcFormPasswordStrengthClass {
@@ -743,27 +744,32 @@
     gap: 0.375rem;
 }
 
-/* The register form submit button sits in #kc-form-buttons right
+/* The register / reset-password submit button sits in #kc-form-buttons right
    after the back-to-login row. Give it breathing room. */
-#kc-register-form #kc-form-buttons {
+#kc-register-form #kc-form-buttons,
+#kc-reset-password-form #kc-form-buttons {
     margin-top: 0.5rem;
 }
 
-/* Back-to-login link — scoped to register so the login page's
-   "Remember me / Forgot password" row keeps its own layout. */
-#kc-register-form #kc-form-options {
+/* Back-to-login link — shared by the register and reset-password ("forgot
+   password") pages, scoped to their forms so the login page's own options
+   row keeps its layout. */
+#kc-register-form #kc-form-options,
+#kc-reset-password-form #kc-form-options {
     margin-top: 1.5rem;
     padding-top: 1.25rem;
     border-top: 1px solid var(--color-surface-100);
 }
 
-#kc-register-form #kc-form-options .kcFormOptionsWrapperClass {
+#kc-register-form #kc-form-options .kcFormOptionsWrapperClass,
+#kc-reset-password-form #kc-form-options .kcFormOptionsWrapperClass {
     display: flex;
     justify-content: center;
     margin: 0;
 }
 
-#kc-register-form #kc-form-options a {
+#kc-register-form #kc-form-options a,
+#kc-reset-password-form #kc-form-options a {
     display: inline-flex;
     align-items: center;
     gap: 0.4rem;
@@ -779,24 +785,28 @@
         color 0.2s ease;
 }
 
-#kc-register-form #kc-form-options a::before {
+#kc-register-form #kc-form-options a::before,
+#kc-reset-password-form #kc-form-options a::before {
     content: "←";
     font-size: 1.1em;
     line-height: 1;
     transition: transform 0.2s ease;
 }
 
-#kc-register-form #kc-form-options a:hover {
+#kc-register-form #kc-form-options a:hover,
+#kc-reset-password-form #kc-form-options a:hover {
     background-color: var(--color-primary-50);
     color: var(--color-primary-700);
     text-decoration: none;
 }
 
-#kc-register-form #kc-form-options a:hover::before {
+#kc-register-form #kc-form-options a:hover::before,
+#kc-reset-password-form #kc-form-options a:hover::before {
     transform: translateX(-3px);
 }
 
-#kc-register-form #kc-form-options a:focus-visible {
+#kc-register-form #kc-form-options a:focus-visible,
+#kc-reset-password-form #kc-form-options a:focus-visible {
     outline: 2px solid var(--color-primary-400);
     outline-offset: 2px;
 }
