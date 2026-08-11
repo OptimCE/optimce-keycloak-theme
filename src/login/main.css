@@ -37,7 +37,6 @@
     --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.06);
     --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.08);
     --shadow-xl: 0 20px 60px rgba(0, 0, 0, 0.12);
-    width:60%;
 }
 
 * {
@@ -69,7 +68,6 @@
 
 #root{
     width: 100%;
-    justify-items: center;
 }
 
 .kcBodyClass::before {
@@ -104,11 +102,17 @@
     z-index: 0;
 }
 
+/* Centre the card with auto margins rather than alignment properties.
+   Block-layout `justify-items`/`justify-self` is Chromium-only — Gecko and
+   WebKit parse it but ignore it during block layout, which pinned the card to
+   the left edge in Firefox and Safari. Auto margins work in every engine. */
 .kcLoginClass {
     position: relative;
     z-index: 1;
     width: 100%;
     max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
     padding: 1.5rem;
 }
 
@@ -135,7 +139,8 @@
     filter: drop-shadow(0 2px 8px rgba(67, 160, 71, 0.2));
 }
 
-.kcTitleClass {
+.kcTitleClass,
+#kc-page-title {
     font-size: 1.625rem;
     font-weight: 700;
     color: var(--color-surface-900);
@@ -150,7 +155,7 @@
     font-weight: 400;
 }
 
-.kcContentClass {
+.kcFormCardClass {
     background: var(--color-surface-0);
     border-radius: var(--radius-xl);
     box-shadow: var(--shadow-xl);
@@ -160,7 +165,7 @@
     overflow: hidden;
 }
 
-.kcContentClass::before {
+.kcFormCardClass::before {
     content: "";
     position: absolute;
     top: 0;
@@ -185,6 +190,16 @@
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
+}
+
+/* Keycloakify's own Register/LoginResetPassword put .kcFormClass on their
+   <form>; our hand-written Login.tsx does not, so the login field groups had no
+   spacing between them at all. Space them with a collapsing margin rather than
+   flex gap on the form: when realm.rememberMe is off, the .kcFormSettingClass
+   wrapper renders empty, and its self-collapsing margin leaves no dead gap
+   where flex `gap` would still reserve a full 1.25rem. */
+#kc-form-login > .kcFormGroupClass + .kcFormGroupClass {
+    margin-top: 1.25rem;
 }
 
 .kcLabelClass {
@@ -215,7 +230,7 @@
     outline: none;
     border-color: var(--color-primary-500);
     box-shadow: 0 0 0 4px rgba(67, 160, 71, 0.12);
-    background-color: #faffff;
+    background-color: #fafffb;
 }
 
 .kcInputClass::placeholder {
@@ -251,23 +266,6 @@
     letter-spacing: 0.01em;
     margin-top: 0.5rem;
     position: relative;
-    overflow: hidden;
-}
-
-.kcButtonClass::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(
-        90deg,
-        transparent,
-        rgba(255, 255, 255, 0.2),
-        transparent
-    );
-    transition: left 0.5s ease;
 }
 
 .kcButtonClass:hover {
@@ -278,10 +276,6 @@
     ) !important;
     box-shadow: 0 6px 20px rgba(67, 160, 71, 0.4);
     transform: translateY(-1px);
-}
-
-.kcButtonClass:hover::before {
-    left: 100%;
 }
 
 .kcButtonClass:active {
@@ -341,24 +335,35 @@
     border-left: 3px solid #ef4444;
 }
 
-.kcAlertErrorClass {
+/* Severity variants. The Template emits `alert-${message.type}` alongside
+   kcAlertClass, so these must match Keycloak's message types — the kcAlert*Class
+   keys are never rendered by keycloakify and left success/info showing in the
+   red base style. Declared after .kcAlertClass so equal specificity still wins. */
+.alert-error {
     background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);
     border-color: #fca5a5;
     color: #991b1b;
 }
 
-.kcAlertSuccessClass {
+.alert-success {
     background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
     border-color: #86efac;
     color: #166534;
     border-left-color: #22c55e;
 }
 
-.kcAlertInfoClass {
+.alert-info {
     background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
     border-color: #93c5fd;
     color: #1e40af;
     border-left-color: #3b82f6;
+}
+
+.alert-warning {
+    background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+    border-color: #fcd34d;
+    color: #92400e;
+    border-left-color: #f59e0b;
 }
 
 .kcLinkClass {
@@ -690,12 +695,12 @@
     }
 }
 
-.kcAlertErrorClass {
+.alert-error {
     animation: shake 0.4s ease;
 }
 
 @media (max-width: 480px) {
-    .kcContentClass {
+    .kcFormCardClass {
         padding: 1.5rem;
         border-radius: var(--radius-lg);
     }
@@ -704,7 +709,8 @@
         padding: 1rem;
     }
 
-    .kcTitleClass {
+    .kcTitleClass,
+    #kc-page-title {
         font-size: 1.375rem;
     }
 }

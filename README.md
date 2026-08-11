@@ -36,8 +36,13 @@ email themes are not implemented):
   font.
 - A custom layout (`src/login/Template.tsx`) with an `OptimCE` header and a
   language selector.
-- Internationalisation for **English, French, Dutch, and German**, with the
-  selected language persisted in the browser's local storage.
+- Internationalisation for **English, French, Dutch, and German**. Keycloak
+  decides the language (the app sends it as `ui_locales` on the login redirect,
+  and the language selector navigates to Keycloak's `kc_locale` URL); the theme
+  mirrors the result into the browser's local storage so the app inherits a
+  language picked here. This requires `Internationalization Enabled` on the
+  realm — without it, anything Keycloak resolved server-side (user profile
+  labels, validation errors) stays in the server's language.
 
 ## Prerequisites
 

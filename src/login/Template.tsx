@@ -72,11 +72,25 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
                                     className="kc-locale-select"
                                     value={currentLanguage.languageTag}
                                     onChange={event => {
-                                        const target = enabledLanguages.find(
-                                            ({ languageTag }) => languageTag === event.target.value
-                                        );
-                                        if (target !== undefined) {
-                                            persistLanguage(target.languageTag);
+                                        const target = enabledLanguages.find(({ languageTag }) => languageTag === event.target.value);
+                                        if (target === undefined) {
+                                            return;
+                                        }
+                                        // Mirror the choice out to the app, which reads the same key.
+                                        persistLanguage(target.languageTag);
+                                        // Then hand the switch to Keycloak: `href` carries `kc_locale`,
+                                        // so the page comes back rendered server-side in the new
+                                        // language — including the messages baked into the kcContext,
+                                        // which a client-side re-render cannot touch. It also sets the
+                                        // KEYCLOAK_LOCALE cookie, keeping the rest of the flow aligned.
+                                        const localeUrl = sameOriginUrl(target.href);
+
+                                        if (localeUrl !== undefined) {
+                                            window.location.href = localeUrl;
+                                        } else {
+                                            // No server-side locale URL to go to — the realm has
+                                            // internationalization disabled, or we are on a mock.
+                                            // syncLanguageWithLocalStorage picks it up on reload.
                                             window.location.reload();
                                         }
                                     }}
@@ -178,4 +192,20 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
             </div>
         </div>
     );
+}
+
+// The locale URLs come from the page data, and this is an authentication page,
+// so only follow one that stays on this origin. Also keeps the keycloakify
+// mocks — whose `url` points at a GitHub gist — from navigating Storybook away.
+function sameOriginUrl(href: string): string | undefined {
+    if (href === "" || href === "#") {
+        return undefined;
+    }
+
+    try {
+        const url = new URL(href, window.location.href);
+        return url.origin === window.location.origin ? url.href : undefined;
+    } catch {
+        return undefined;
+    }
 }
