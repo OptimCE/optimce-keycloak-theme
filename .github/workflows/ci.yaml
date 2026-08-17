@@ -15,6 +15,12 @@ jobs:
             - uses: actions/setup-node@v4
             - uses: bahmutov/npm-install@v1
             - run: npm run build-keycloak-theme
+            - name: Reject Chromium-only box alignment
+              run: |
+                  if grep -nE '^[[:space:]]*(justify-items|justify-self)[[:space:]]*:' src/login/main.css; then
+                    echo "::error::justify-items/justify-self do nothing outside grid/flex containers in Gecko and WebKit. Use auto margins or an explicit display."
+                    exit 1
+                  fi
 
     check_if_version_upgraded:
         name: Check if version upgrade

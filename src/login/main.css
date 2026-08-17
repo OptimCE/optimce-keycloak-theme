@@ -66,8 +66,15 @@
     width:100%;
 }
 
+/* Explicit flex container. This rule used to read `justify-items: center`, which
+   is a no-op outside Blink: block containers implement CSS Box Alignment only in
+   Chromium, so Gecko and WebKit parsed the declaration and then ignored it during
+   block layout, pinning the card to x=0. Centre with a layout mode every engine
+   honours, and keep `display` consistent with the alignment property used. */
 #root{
     width: 100%;
+    display: flex;
+    justify-content: center;
 }
 
 .kcBodyClass::before {
@@ -102,10 +109,11 @@
     z-index: 0;
 }
 
-/* Centre the card with auto margins rather than alignment properties.
-   Block-layout `justify-items`/`justify-self` is Chromium-only — Gecko and
-   WebKit parse it but ignore it during block layout, which pinned the card to
-   the left edge in Firefox and Safari. Auto margins work in every engine. */
+/* Second, independent centring mechanism — deliberately not redundant with the
+   `justify-content` on #root above. Auto margins centre a flex item exactly as
+   they centre a block, so the card stays centred even if #root ever reverts to
+   a plain block container. Both survive in every engine; the property that did
+   not was `justify-items`, which is why neither is used here. */
 .kcLoginClass {
     position: relative;
     z-index: 1;
