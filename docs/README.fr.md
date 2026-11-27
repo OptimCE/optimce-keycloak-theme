@@ -4,7 +4,7 @@
 
 # Thème Keycloak OptimCE
 
-[![Site web](https://img.shields.io/badge/Site%20web-optimce.be-2e7d32.svg)](https://www.optimce.be/fr/)
+[![Site web](https://img.shields.io/badge/Site%20web-optimce.be-2e7d32.svg)](https://www.optimce.be)
 [![Licence](https://img.shields.io/badge/Licence-MIT-blue.svg)](../LICENSE)
 [![en](https://img.shields.io/badge/lang-en-lightgrey.svg)](../README.md)
 [![fr](https://img.shields.io/badge/lang-fr-43a047.svg)](README.fr.md)
@@ -12,11 +12,11 @@
 [![nl](https://img.shields.io/badge/lang-nl-lightgrey.svg)](README.nl.md)
 
 Le **thème Keycloak OptimCE** est l'expérience de connexion personnalisée de la
-plateforme [OptimCE](https://www.optimce.be/fr/). Il s'agit d'un thème
+plateforme [OptimCE](https://www.optimce.be). Il s'agit d'un thème
 [Keycloakify](https://keycloakify.dev) qui applique l'identité visuelle
 d'OptimCE aux pages de connexion de Keycloak — une palette de couleurs verte,
 la police DM Sans et une page de connexion personnalisée. Pour en savoir plus
-sur le projet, consultez [www.optimce.be](https://www.optimce.be/fr/).
+sur le projet, consultez [www.optimce.be](https://www.optimce.be).
 
 Ce dépôt est habituellement utilisé comme sous-module git du
 [monorepo de développement OptimCE](https://github.com/OptimCE/monorepo), où le
@@ -37,8 +37,14 @@ Le thème personnalise uniquement le type de thème **login** (les thèmes
   jetons de design verts et la police DM Sans.
 - Une mise en page personnalisée (`src/login/Template.tsx`) avec un en-tête
   `OptimCE` et un sélecteur de langue.
-- L'internationalisation en **anglais, français, néerlandais et allemand**, la
-  langue choisie étant conservée dans le stockage local du navigateur.
+- L'internationalisation en **anglais, français, néerlandais et allemand**.
+  Keycloak décide de la langue (l'application l'envoie dans `ui_locales` à la
+  redirection de connexion, et le sélecteur de langue ouvre l'URL `kc_locale` de
+  Keycloak) ; le thème recopie le résultat dans le stockage local du navigateur,
+  afin que l'application hérite d'une langue choisie ici. Cela exige
+  `Internationalization Enabled` sur le realm — sans quoi tout ce que Keycloak a
+  résolu côté serveur (libellés du profil utilisateur, erreurs de validation)
+  reste dans la langue du serveur.
 
 ## Prérequis
 

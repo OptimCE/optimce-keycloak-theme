@@ -39,8 +39,13 @@ Das Theme passt ausschließlich den Theme-Typ **login** an (die Themes
 - Ein benutzerdefiniertes Layout (`src/login/Template.tsx`) mit einer
   `OptimCE`-Kopfzeile und einer Sprachauswahl.
 - Internationalisierung für **Englisch, Französisch, Niederländisch und
-  Deutsch**, wobei die gewählte Sprache im lokalen Speicher des Browsers
-  gespeichert wird.
+  Deutsch**. Keycloak bestimmt die Sprache (die Anwendung sendet sie bei der
+  Login-Weiterleitung als `ui_locales`, und die Sprachauswahl ruft die
+  `kc_locale`-URL von Keycloak auf); das Theme übernimmt das Ergebnis in den
+  lokalen Speicher des Browsers, sodass die Anwendung eine hier gewählte Sprache
+  erbt. Dafür muss im Realm `Internationalization Enabled` gesetzt sein — sonst
+  bleibt alles, was Keycloak serverseitig aufgelöst hat (Beschriftungen des
+  Benutzerprofils, Validierungsfehler), in der Sprache des Servers.
 
 ## Voraussetzungen
 
