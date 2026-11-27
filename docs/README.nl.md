@@ -37,8 +37,14 @@ Het thema past uitsluitend het thematype **login** aan (de thema's
   en het DM Sans-lettertype.
 - Een aangepaste lay-out (`src/login/Template.tsx`) met een `OptimCE`-koptekst
   en een taalkiezer.
-- Internationalisatie voor **Engels, Frans, Nederlands en Duits**, waarbij de
-  gekozen taal wordt bewaard in de lokale opslag van de browser.
+- Internationalisatie voor **Engels, Frans, Nederlands en Duits**. Keycloak
+  bepaalt de taal (de applicatie stuurt ze mee als `ui_locales` bij de
+  doorverwijzing naar de aanmelding, en de taalkiezer opent de `kc_locale`-URL van
+  Keycloak); het thema neemt het resultaat over in de lokale opslag van de
+  browser, zodat de applicatie een hier gekozen taal overneemt. Dit vereist
+  `Internationalization Enabled` op de realm — anders blijft alles wat Keycloak op
+  de server heeft bepaald (labels van het gebruikersprofiel, validatiefouten) in
+  de taal van de server.
 
 ## Vereisten
 
